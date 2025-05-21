@@ -9,6 +9,41 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
   
   <style>
+    /* Default countdown style */
+.countdown {
+  text-align: center;
+  margin-top: 20px;
+  background-color: #fffbe6;
+  padding: 15px 25px;
+  border: 2px dashed #ff9800;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+/* Mobile-specific styles */
+@media (max-width: 650px) {
+  .countdown {
+    background-color: #e0e0e0; /* light gray background */
+    padding: 10px 15px;
+    font-weight: 900; /* extra bold */
+    font-size: 1.2rem;
+    border: none; /* optional: remove border for cleaner look */
+    margin: 10px 15px;
+    border-radius: 8px;
+  }
+
+  .countdown h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+
+  #timer span {
+    font-size: 1.8rem;
+    margin: 0 6px;
+  }
+}
+
     body {
     background-color: #FDFBD4;
     font-family: 'Playfair Display', serif;
@@ -18,39 +53,43 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 100vh;
-    }
+  }
+  @media (max-width: 650px) {
+  body {
+    padding: 10px;
+ }
+}
 
     h1 {
       font-size: 4rem;
       margin-bottom: 0;
       letter-spacing: 4px;
       text-align: center;
+      white-space: nowrap;
     }
 
-    h2 {
-      font-size: 2.5rem;
-      margin-top: 0;
-      color: red;
-      letter-spacing: 2px;
-      text-align: center;
-      font-weight: 700;
-    }
+    .countdown h2 {
+  font-weight: 900;
+  font-family: 'Playfair Display', serif;
+  color: #444444;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
 
-    .brand-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      font-weight: 700;
-      color: blue;
-      text-align: center;
-      margin-top: 10px;
-      letter-spacing: 5px;
-      text-transform: uppercase;
-      user-select: none;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-    }
-
-    .cow-gallery {
+.brand-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: blue;
+  text-align: center;
+  margin-top: 10px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  user-select: none;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+     .cow-gallery {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
