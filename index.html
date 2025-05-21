@@ -7,8 +7,27 @@
   
   <!-- Stylish font from Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
-  
-  <style>
+<style>
+.instagram-icon {
+  position: fixed;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background-image: url('https://cdn-icons-png.flaticon.com/512/174/174855.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+  z-index: 10000;
+  transition: transform 0.3s ease;
+}
+
+.instagram-icon:hover {
+  transform: translateY(-50%) scale(1.2);
+}
+
     /* Default countdown style */
 .countdown {
   text-align: center;
@@ -22,7 +41,7 @@
 }
 
 /* Mobile-specific styles */
-@media (max-width: 650px) {
+@media (max-width: 650px){
   h1 {
     font-size: 2.5rem !important; /* smaller font size */
     white-space: normal !important; /* allow wrapping */
@@ -30,7 +49,7 @@
     padding: 0 10px;
     margin-bottom: 10px;
   }
-  
+
   h2 {
     font-size: 1.5rem !important;
     padding: 0 10px;
@@ -63,33 +82,28 @@
     font-size: 1.5rem !important;
     margin: 0 4px !important;
   }
-
-  body {
-    padding: 10px !important;
-    overflow-x: hidden; /* prevent horizontal scroll */
+    body {
+    padding: 10px;
   }
 }
+   body {
+  background-color: #FDFBD4;
+  font-family: 'Playfair Display', serif;
+  margin: 0;
+  padding: 20px;
+  color: #222;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
 
-
-    body {
-    background-color: #FDFBD4;
-    font-family: 'Playfair Display', serif;
-    margin: 0;
-    padding: 20px;
-    color: #222;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 100vw;
-overflow-x: hidden;
-
-  }
   @media (max-width: 650px) {
   body {
     padding: 10px;
- }
+  }
 }
-
     h1 {
       font-size: 4rem;
       margin-bottom: 0;
@@ -259,6 +273,7 @@ overflow-x: hidden;
   <h1>EID UL ADHA</h1>
   <h2>QURBANI COW</h2>
   <div class="brand-name">KAFI AGRO</div>
+
   <div class="countdown">
   <h2>Countdown to Eid-ul-Adha 2025</h2>
   <div id="timer">
@@ -339,5 +354,6 @@ overflow-x: hidden;
     cowSound.play();
   });
 </script>
+<a href="https://www.instagram.com/insaf_abedin/?__pwa=1" target="_blank" rel="noopener noreferrer" class="instagram-icon" aria-label="Instagram Profile"></a>
 </body>
 </html>
