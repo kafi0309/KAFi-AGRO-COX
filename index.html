@@ -185,6 +185,7 @@
 </script>
 
 <body>
+  <audio id="cowSound" src="cow.mp3"></audio>
 
   <h1>EID UL ADHA</h1>
   <h2>QURBANI COW</h2>
@@ -195,7 +196,7 @@
     <span id="days">00</span> Days
     <span id="hours">00</span> Hrs
     <span id="minutes">00</span> Min
-    <span id="seconds">00</span>sec
+    <span id="seconds">00</span> sec
     </div> <!-- Close #timer -->
 </div> <!-- Close .countdown -->
     <section class="cow-gallery">
@@ -255,6 +256,19 @@
     }
   });
 </script>
+<script>
+  const cowSound = document.getElementById("cowSound");
 
+  // For both desktop and mobile
+  document.addEventListener("click", () => {
+    cowSound.currentTime = 0; // Rewind to start if playing
+    cowSound.play();
+  });
+
+  document.addEventListener("touchstart", () => {
+    cowSound.currentTime = 0;
+    cowSound.play();
+  });
+</script>
 </body>
 </html>
