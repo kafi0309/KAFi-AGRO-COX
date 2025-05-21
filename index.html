@@ -10,15 +10,15 @@
   
   <style>
     body {
-      background-color: #FDFBD4;
-      font-family: 'Playfair Display', serif;
-      margin: 0;
-      padding: 20px;
-      color: #222;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
+    background-color: #FDFBD4;
+    font-family: 'Playfair Display', serif;
+    margin: 0;
+    padding: 20px;
+    color: #222;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
     }
 
     h1 {
@@ -137,17 +137,68 @@
 
 #close-modal:hover {
   background-color: #0056b3;
+  }
+  .countdown {
+  text-align: center;
+  margin-top: 20px;
+  background-color: #fffbe6;
+  padding: 15px 25px;
+  border: 2px dashed #ff9800;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 1.5rem;
 }
 
-  </style>
+#timer span {
+  color: #d32f2f;
+  font-size: 2rem;
+  margin: 0 8px;
+}
+
+</style>
 </head>
+<script>
+  const eidDate = new Date("June 8, 2025 00:00:00").getTime();
+
+  const updateCountdown = () => {
+    const now = new Date().getTime();
+    const distance = eidDate - now;
+
+    if (distance < 0) {
+      document.getElementById("timer").innerHTML = "Eid Mubarak!";
+      return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("days").textContent = days;
+    document.getElementById("hours").textContent = hours;
+    document.getElementById("minutes").textContent = minutes;
+    document.getElementById("seconds").textContent = seconds;
+  };
+
+  setInterval(updateCountdown, 1000);
+  updateCountdown();
+</script>
+
 <body>
 
   <h1>EID UL ADHA</h1>
   <h2>QURBANI COW</h2>
   <div class="brand-name">KAFI AGRO</div>
-
-  <section class="cow-gallery">
+  <div class="countdown">
+  <h2>Countdown to Eid-ul-Adha 2025</h2>
+  <div id="timer">
+    <span id="days">00</span> Days
+    <span id="hours">00</span> Hrs
+    <span id="minutes">00</span> Min
+    <span id="seconds">00</span>sec
+    </div> <!-- Close #timer -->
+</div> <!-- Close .countdown -->
+    <section class="cow-gallery">
     <div class="cow-card">
       <img src="cow1.png" alt="Cow 1" />
       <div class="price">120,000 BDT</div>
@@ -204,7 +255,6 @@
     }
   });
 </script>
-
 
 </body>
 </html>
