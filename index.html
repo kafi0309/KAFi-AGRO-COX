@@ -237,35 +237,63 @@
   font-size: 2rem;
   margin: 0 8px;
 }
+@keyframes pop {
+  0% {
+    transform: scale(1);
+    color: #d32f2f;
+  }
+  50% {
+    transform: scale(1.3);
+    color: #ff5722;
+  }
+  100% {
+    transform: scale(1);
+    color: #d32f2f;
+  }
+}
+
+.pop-animate {
+  animation: pop 0.5s ease forwards;
+  display: inline-block;
+}
+.qurbani-calculator {
+  background-color: #fffbe6;
+  padding: 20px;
+  border: 2px dashed #ff9800;
+  border-radius: 10px;
+  max-width: 400px;
+  margin: 40px auto;
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+}
+
+.qurbani-calculator input {
+  width: 80%;
+  padding: 8px;
+  margin: 10px 0;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.qurbani-calculator button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease;
+}
+
+.qurbani-calculator button:hover {
+  background-color: #0056b3;
+}
+
 
 </style>
 </head>
-<script>
-  const eidDate = new Date("June 8, 2025 00:00:00").getTime();
-
-  const updateCountdown = () => {
-    const now = new Date().getTime();
-    const distance = eidDate - now;
-
-    if (distance < 0) {
-      document.getElementById("timer").innerHTML = "Eid Mubarak!";
-      return;
-    }
-
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    document.getElementById("days").textContent = days;
-    document.getElementById("hours").textContent = hours;
-    document.getElementById("minutes").textContent = minutes;
-    document.getElementById("seconds").textContent = seconds;
-  };
-
-  setInterval(updateCountdown, 1000);
-  updateCountdown();
-</script>
 
 <body>
   <audio id="cowSound" src="cow.mp3"></audio>
@@ -283,6 +311,9 @@
     <span id="seconds">00</span> sec
     </div> <!-- Close #timer -->
 </div> <!-- Close .countdown -->
+<a href="#qurbani-calculator" style="display:inline-block; margin: 20px 0; font-weight: bold; color: #007bff; cursor: pointer; text-decoration: underline;">
+  Calculate Your Qurbani Needs →
+</a>
     <section class="cow-gallery">
     <div class="cow-card">
       <img src="cow1.png" alt="Cow 1" />
@@ -309,6 +340,26 @@
       <div class="price">9,600,000 BDT</div>
     </div>
   </section>
+  <section id="qurbani-calculator" class="qurbani-calculator">
+  <h2>Qurbani Calculator</h2>
+
+  <label>
+    Number of family members:
+    <input type="number" id="family-size" min="1" placeholder="Enter family size" />
+  </label>
+
+  <p>OR</p>
+
+  <label>
+    Donation amount (BDT):
+    <input type="number" id="donation-amount" min="0" placeholder="Enter donation amount" />
+  </label>
+
+  <button id="calculate-btn">Calculate</button>
+
+  <div id="calculator-result" style="margin-top: 15px; font-weight: bold;"></div>
+</section>
+
 <!-- Modal Structure -->
 <div id="popup-modal" class="modal-overlay">
   <div class="modal-content">
@@ -320,13 +371,15 @@
   const modal = document.getElementById('popup-modal');
   const closeBtn = document.getElementById('close-modal');
   const cowImages = document.querySelectorAll('.cow-card img');
-
+  const cowSound = document.getElementById("cowSound");
   // When any cow image is clicked, show the modal
   cowImages.forEach(img => {
-    img.addEventListener('click', () => {
-      modal.style.display = 'flex';
-    });
+  img.addEventListener('click', () => {
+    modal.style.display = 'flex';  // Show modal
+    cowSound.currentTime = 0;      // Reset cow sound
+    cowSound.play();               // Play cow sound
   });
+});
 
   // Close modal on clicking the close button
   closeBtn.addEventListener('click', () => {
@@ -341,19 +394,81 @@
   });
 </script>
 <script>
-  const cowSound = document.getElementById("cowSound");
+  const eidDate = new Date("June 8, 2025 00:00:00").getTime();
+const animateNumber = (element) => {
+  element.classList.remove('pop-animate'); // reset animation
+  void element.offsetWidth;                 // trigger reflow
+  element.classList.add('pop-animate');    // start animation
+};
 
-  // For both desktop and mobile
-  document.addEventListener("click", () => {
-    cowSound.currentTime = 0; // Rewind to start if playing
-    cowSound.play();
-  });
+const updateCountdown = () => {
+  const now = new Date().getTime();
+  const distance = eidDate - now;
 
-  document.addEventListener("touchstart", () => {
-    cowSound.currentTime = 0;
-    cowSound.play();
+  if (distance < 0) {
+    document.getElementById("timer").innerHTML = "Eid Mubarak!";
+    return;
+  }
+
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  const daysEl = document.getElementById("days");
+  const hoursEl = document.getElementById("hours");
+  const minutesEl = document.getElementById("minutes");
+  const secondsEl = document.getElementById("seconds");
+
+  if (daysEl.textContent != days) {
+    daysEl.textContent = days;
+    animateNumber(daysEl);
+  }
+  if (hoursEl.textContent != hours) {
+    hoursEl.textContent = hours;
+    animateNumber(hoursEl);
+  }
+  if (minutesEl.textContent != minutes) {
+    minutesEl.textContent = minutes;
+    animateNumber(minutesEl);
+  }
+  if (secondsEl.textContent != seconds) {
+    secondsEl.textContent = seconds;
+    animateNumber(secondsEl);
+  }
+};
+setInterval(updateCountdown, 1000);
+  updateCountdown();
+</script>
+<script>
+  document.getElementById('calculate-btn').addEventListener('click', () => {
+    const familySizeInput = document.getElementById('family-size').value;
+    const donationAmountInput = document.getElementById('donation-amount').value;
+    const resultDiv = document.getElementById('calculator-result');
+
+    const averageCowPrice = 60000; // Average price per cow in BDT
+    const sharesPerCow = 7;        // Number of shares per cow
+    const sharePrice = averageCowPrice / sharesPerCow;
+
+    resultDiv.textContent = ''; // Clear previous result
+
+    if (familySizeInput && familySizeInput > 0) {
+      const familySize = parseInt(familySizeInput);
+      const cowsNeeded = Math.ceil(familySize / sharesPerCow);
+      const estimatedCost = cowsNeeded * averageCowPrice;
+      resultDiv.textContent = `You need approximately ${cowsNeeded} cow(s). Estimated cost: BDT ${estimatedCost.toLocaleString()}.`;
+    } else if (donationAmountInput && donationAmountInput > 0) {
+      const donationAmount = parseFloat(donationAmountInput);
+      const sharesCanBuy = Math.floor(donationAmount / sharePrice);
+      const cowsEquivalent = (sharesCanBuy / sharesPerCow).toFixed(2);
+      resultDiv.textContent = `With BDT ${donationAmount.toLocaleString()}, you can buy ${sharesCanBuy} share(s), which is about ${cowsEquivalent} cow(s).`;
+    } else {
+      resultDiv.textContent = 'Please enter either family size or donation amount.';
+    }
   });
 </script>
+
+
 <a href="https://www.instagram.com/insaf_abedin/?__pwa=1" target="_blank" rel="noopener noreferrer" class="instagram-icon" aria-label="Instagram Profile"></a>
 </body>
 </html>
