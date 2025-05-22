@@ -314,6 +314,11 @@
 <a href="#qurbani-calculator" style="display:inline-block; margin: 20px 0; font-weight: bold; color: #007bff; cursor: pointer; text-decoration: underline;">
   Calculate Your Qurbani Needs →
 </a>
+<!-- Sunnah Info Link -->
+<p style="font-weight: bold; font-size: 1.2rem; color: #007bff; cursor: pointer; text-decoration: underline; margin: 20px 0;" id="open-sunnah-popup">
+  ✦ Discover the Essential Sunnah of Qurbani
+</p>
+
     <section class="cow-gallery">
     <div class="cow-card">
       <img src="cow1.png" alt="Cow 1" />
@@ -467,7 +472,41 @@ setInterval(updateCountdown, 1000);
     }
   });
 </script>
+<!-- Sunnah Modal -->
+<div id="sunnah-modal" class="modal-overlay" style="display:none;">
+  <div class="modal-content" style="max-height: 400px; overflow-y: auto; font-weight: 700; font-size: 1.1rem; color: #222;">
+    <p>কুরবানির সুনাহ অনুযায়ী, কুরবানি করার সময় নিম্নলিখিত বিষয়গুলো মেনে চলা জরুরি:</p>
+    <ol>
+      <li>কুরবানি ইবাদতের অংশ, তাই আল্লাহর সন্তুষ্টির জন্য ন্যায্য পশু বেছে নিতে হবে।</li>
+      <li>পশুর বয়স, স্বাস্থ্য এবং কোন শারীরিক ত্রুটি না থাকা জরুরি। পুরুষ গরু কমপক্ষে ২ বছর, মেয়ে গরু কমপক্ষে ১ বছর বয়সী হতে হবে।</li>
+      <li>পশুর চোখ, কান, পা, দাঁত ভালো এবং কোনো ত্রুটি নেই তা নিশ্চিত করতে হবে।</li>
+      <li>কুরবানির সময় পশুকে দুঃখ না দিয়ে সুস্থ ও শান্তিপূর্ণভাবে কোরবানি করা উচিত।</li>
+      <li>সালাতু কুবার (কুরবানির নামাজ) আদায় করা সুন্নত।</li>
+      <li>কুরবানির মাংস গরীব, অসহায় ও আত্মীয়-স্বজনদের মধ্যে সমানভাবে বিতরণ করা উত্তম।</li>
+    </ol>
+    <button id="close-sunnah-modal" style="margin-top: 20px; padding: 8px 20px; font-weight: 700; border: none; background-color: #007BFF; color: white; border-radius: 5px; cursor: pointer;">Close</button>
+  </div>
+</div>
 
+<script>
+  const sunnahModal = document.getElementById('sunnah-modal');
+  const openSunnahBtn = document.getElementById('open-sunnah-popup');
+  const closeSunnahBtn = document.getElementById('close-sunnah-modal');
+
+  openSunnahBtn.addEventListener('click', () => {
+    sunnahModal.style.display = 'flex';
+  });
+
+  closeSunnahBtn.addEventListener('click', () => {
+    sunnahModal.style.display = 'none';
+  });
+
+  sunnahModal.addEventListener('click', (e) => {
+    if (e.target === sunnahModal) {
+      sunnahModal.style.display = 'none';
+    }
+  });
+</script>
 
 <a href="https://www.instagram.com/insaf_abedin/?__pwa=1" target="_blank" rel="noopener noreferrer" class="instagram-icon" aria-label="Instagram Profile"></a>
 </body>
